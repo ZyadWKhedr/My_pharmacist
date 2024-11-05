@@ -21,7 +21,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           'Transform your pharmacy practice with PharmaCare — your all-in-one app for efficient medication management and enhanced patient care.',
     ),
     OnboardingPage(
-      image: 'assets/images/rb_162852 1.png',
+      image: 'assets/images/Group 2 (4).png',
       description:
           'Manage prescriptions, track patient histories, and set up medication reminders — all from one convenient app.',
     ),
@@ -55,7 +55,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               curve: Curves.easeIn,
             );
           } else {
-            Get.offNamed('/home');
+            Get.offNamed('/sign-up_or_sign-in');
           }
         },
         child: Padding(

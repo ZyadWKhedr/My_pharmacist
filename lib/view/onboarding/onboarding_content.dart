@@ -41,7 +41,7 @@ class OnboardingContent extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             page.description,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.04,
               fontWeight: FontWeight.w400,

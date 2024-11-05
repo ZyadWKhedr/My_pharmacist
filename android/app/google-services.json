@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "621933923785",
+    "project_id": "helio-84742",
+    "storage_bucket": "helio-84742.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621933923785:android:0c4bc8194286d3476e6c18",
+        "android_client_info": {
+          "package_name": "com.example.healio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0-jbts49yZ8ViaxKBDfGAo6QhXtbnTL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

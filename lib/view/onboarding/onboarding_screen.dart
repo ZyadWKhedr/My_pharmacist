@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:healio/core/const.dart';
+import 'package:healio/view/onboarding/onboarding_content.dart';
+import 'package:healio/view/onboarding/onboarding_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -43,7 +44,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           });
         },
         itemBuilder: (context, index) {
-          return _buildPage(_pages[index]);
+          return OnboardingContent(page: _pages[index]);
         },
       ),
       floatingActionButton: GestureDetector(
@@ -91,61 +92,4 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
     );
   }
-
-  Widget _buildPage(OnboardingPage page) {
-    return Padding(
-      padding: const EdgeInsets.all(45.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: Image.asset(
-              page.image,
-            ),
-          ),
-          const SizedBox(height: 50),
-          Text(
-            page.title,
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width * 0.08,
-              fontWeight: FontWeight.w700,
-              color: lightBlue,
-              height: 0.5,
-            ),
-          ),
-          Text(
-            page.myPharmacist,
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width * 0.1,
-              fontWeight: FontWeight.w700,
-              color: orange,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            page.description,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width * 0.04,
-              fontWeight: FontWeight.w400,
-              color: grey,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class OnboardingPage {
-  final String image;
-  final String myPharmacist = "My Pharmacist";
-  final String title = "Welcome to \n";
-  final String description;
-
-  OnboardingPage({
-    required this.image,
-    required this.description,
-  });
 }

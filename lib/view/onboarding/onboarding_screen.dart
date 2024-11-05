@@ -57,31 +57,34 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Get.offNamed('/home');
           }
         },
-        child: Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.transparent,
-            border: Border.all(
-              color: Colors.white,
-              width: 2,
-            ),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 6,
-                offset: Offset(0, 3),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.transparent,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
               ),
-            ],
-          ),
-          child: Center(
-            child: Icon(
-              _currentIndex == _pages.length - 1
-                  ? Icons.check
-                  : Icons.arrow_forward,
-              color: Colors.white,
-              size: 30,
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 6,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Center(
+              child: Icon(
+                _currentIndex == _pages.length - 1
+                    ? Icons.check
+                    : Icons.arrow_forward,
+                color: Colors.white,
+                size: 30,
+              ),
             ),
           ),
         ),
@@ -91,7 +94,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildPage(OnboardingPage page) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(45.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,18 +133,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Container buildDot({required int index}) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      height: 8,
-      width: 8,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: _currentIndex == index ? Colors.blue : Colors.grey,
       ),
     );
   }

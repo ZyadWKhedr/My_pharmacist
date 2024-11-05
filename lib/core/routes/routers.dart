@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:healio/view/auth/sign_in_page.dart';
 import 'package:healio/view/auth/sign_up_page.dart';
 import 'package:healio/view/home_page.dart';
+import 'package:healio/view/onboarding/onboarding_screen.dart';
 import 'package:healio/view/splash_screen.dart';
 
 import 'routes.dart';
@@ -29,8 +30,8 @@ class AppPages {
       transition: Transition.circularReveal,
     ),
     GetPage(
-      name: AppRoutes.onboarding3,
-      page: () => SignUpPage(),
+      name: AppRoutes.onboarding,
+      page: () => OnboardingScreen(),
       transition: Transition.zoom,
     ),
   ];

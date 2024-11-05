@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:get/get.dart';
+import 'package:healio/core/const.dart';
 import 'package:healio/core/routes/routers.dart';
 import 'package:healio/core/routes/routes.dart';
 import 'package:healio/view_model/user_view_model.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.splash,
       getPages: AppPages.routes,
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 248, 248, 248),
+        scaffoldBackgroundColor: backgroungColor,
       ),
     );
   }

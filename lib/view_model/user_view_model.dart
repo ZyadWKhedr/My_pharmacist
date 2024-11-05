@@ -18,10 +18,16 @@ class UserViewModel extends ChangeNotifier {
 
   // Sign up method
   Future<void> signUp(String email, String password, String username) async {
+    // Check for empty fields
+    if (email.isEmpty || password.isEmpty || username.isEmpty) {
+      Get.snackbar('Error', 'All fields must be filled out.',
+          snackPosition: SnackPosition.BOTTOM);
+      return;
+    }
+
     password = password.trim(); // Trim any whitespace
     print(
         'Attempting to sign up with password: "$password" (Length: ${password.length})');
-    print(password);
 
     // Validate password before proceeding to sign-up
     if (!_isValidPassword(password)) {
@@ -39,23 +45,33 @@ class UserViewModel extends ChangeNotifier {
         _saveUserSession(_user!.uid);
         Get.snackbar('Success', 'Sign up successful!',
             snackPosition: SnackPosition.BOTTOM);
+        // Navigate to home page
+        Get.offNamed('/home'); 
       }
     } catch (e) {
       String errorMessage = _getErrorMessage(e);
       Get.snackbar('Error', errorMessage, snackPosition: SnackPosition.BOTTOM);
     }
-    print('Entered password: "$password"');
     notifyListeners();
   }
 
   // Sign in method
   Future<void> signIn(String email, String password) async {
+    // Check for empty fields
+    if (email.isEmpty || password.isEmpty) {
+      Get.snackbar('Error', 'Email and password must be filled out.',
+          snackPosition: SnackPosition.BOTTOM);
+      return;
+    }
+
     try {
       _user = await _userRepository.signIn(email, password);
       if (_user != null) {
         _saveUserSession(_user!.uid);
         Get.snackbar('Success', 'Sign in successful!',
             snackPosition: SnackPosition.BOTTOM);
+        // Navigate to home page
+        Get.offNamed('/home'); 
       }
     } catch (e) {
       String errorMessage = _getErrorMessage(e);
@@ -72,6 +88,8 @@ class UserViewModel extends ChangeNotifier {
         _saveUserSession(_user!.uid);
         Get.snackbar('Success', 'Google sign-in successful!',
             snackPosition: SnackPosition.BOTTOM);
+        // Navigate to home page
+        Get.offNamed('/home'); 
       }
     } catch (e) {
       String errorMessage = _getErrorMessage(e);
@@ -86,6 +104,8 @@ class UserViewModel extends ChangeNotifier {
     _user = null;
     _clearUserSession();
     notifyListeners();
+    // Optionally navigate to the login page
+    Get.offNamed('/login'); 
   }
 
   // Validate password format
@@ -106,6 +126,10 @@ class UserViewModel extends ChangeNotifier {
     if (uid != null) {
       // Only assign user if there's a UID
       _user = FirebaseAuth.instance.currentUser;
+      // If user is found, navigate to home page
+      if (_user != null) {
+        Get.offNamed('/home'); // Adjust the route as needed
+      }
     }
     notifyListeners();
   }
@@ -118,8 +142,20 @@ class UserViewModel extends ChangeNotifier {
   // Get user-friendly error message
   String _getErrorMessage(Object error) {
     if (error is FirebaseAuthException) {
-      return error.message ?? 'An unknown error occurred.';
+      switch (error.code) {
+        case 'email-already-in-use':
+          return 'The email address is already in use by another account.';
+        case 'invalid-email':
+          return 'The email address is not valid.';
+        case 'user-not-found':
+          return 'No user found for that email.';
+        case 'wrong-password':
+          return 'Wrong password provided for that user.';
+        default:
+          return error.message ??
+              'An unknown error occurred in authentication.';
+      }
     }
-    return 'An unknown error occurred.';
+    return 'An unknown error occurred. $error';
   }
 }

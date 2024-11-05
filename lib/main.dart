@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
@@ -9,6 +10,8 @@ import 'package:healio/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
+  await WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await dotenv.load(fileName: "assets/.env");
   Gemini.init(
     apiKey: dotenv.env["GEMINI_API_KEY"]!,

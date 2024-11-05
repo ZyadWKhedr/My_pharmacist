@@ -4,6 +4,8 @@ import 'package:healio/core/const.dart';
 import 'package:healio/core/widgets/custom_button.dart';
 import 'package:healio/view/auth/widgets/custom_text_field.dart';
 import 'package:healio/view/auth/widgets/or_divider.dart';
+import 'package:healio/view_model/user_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({Key? key}) : super(key: key);
@@ -13,6 +15,7 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userViewModel = Provider.of<UserViewModel>(context);
     return Scaffold(
       body: Center(
         child: Padding(
@@ -85,7 +88,10 @@ class SignInPage extends StatelessWidget {
                 ),
                 CustomButton(
                   label: 'Login',
-                  onPressed: () {},
+                  onPressed: () {
+                    userViewModel.signIn(emailController.text.trim(),
+                        passwordController.text.trim());
+                  },
                   color: lightBlue,
                   widthFactor: 1,
                 ),

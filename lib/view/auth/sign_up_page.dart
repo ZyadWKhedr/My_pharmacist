@@ -4,6 +4,8 @@ import 'package:healio/core/const.dart';
 import 'package:healio/core/widgets/custom_button.dart';
 import 'package:healio/view/auth/widgets/custom_text_field.dart';
 import 'package:healio/view/auth/widgets/or_divider.dart';
+import 'package:healio/view_model/user_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
@@ -14,6 +16,7 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userViewModel = Provider.of<UserViewModel>(context);
     return Scaffold(
       body: Center(
         child: Padding(
@@ -94,7 +97,12 @@ class SignUpPage extends StatelessWidget {
                 ),
                 CustomButton(
                   label: 'Create an account',
-                  onPressed: () {},
+                  onPressed: () {
+                    userViewModel.signUp(
+                        emailController.text.trim(),
+                        passwordController.text.trim(),
+                        nameController.text.trim());
+                  },
                   color: lightBlue,
                   widthFactor: 1,
                 ),
@@ -107,7 +115,9 @@ class SignUpPage extends StatelessWidget {
                 ),
                 CustomButton(
                   label: 'Sign Up with Google',
-                  onPressed: () {},
+                  onPressed: () {
+                    userViewModel.signInWithGoogle();
+                  },
                   color: Colors.white,
                   textColor: Colors.black,
                   widthFactor: 1,

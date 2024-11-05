@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'helio-84742.firebasestorage.app',
     iosBundleId: 'com.example.healio',
   );
+
 }

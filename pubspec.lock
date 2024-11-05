@@ -302,6 +302,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: b7c7be5cd9f6ef7a78429cabd2774d3c4af50e79cb2b7593e3d5d763ef95c61b
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
   flutter_gemini:
     dependency: "direct main"
     description:
@@ -424,14 +432,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.4+2"
-  graphs:
-    dependency: transitive
-    description:
-      name: graphs
-      sha256: "741bbf84165310a68ff28fe9e727332eef1407342fca52759cb21ad8177bb8d0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.2"
   html:
     dependency: transitive
     description:
@@ -712,22 +712,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.2"
-  rive:
-    dependency: "direct main"
-    description:
-      name: rive
-      sha256: "468f0880d49c513e09fdfba26e4abd9d50433c2cf398210b62948d8de3837dd5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.13.15"
-  rive_common:
-    dependency: transitive
-    description:
-      name: rive_common
-      sha256: a3e5786f8d85c89977062b9ceeb3b72a7c28f81e32fb68497744042ce20bee2f
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.12"
   rxdart:
     dependency: transitive
     description:

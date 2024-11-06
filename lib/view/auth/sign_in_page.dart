@@ -104,7 +104,9 @@ class SignInPage extends StatelessWidget {
                 ),
                 CustomButton(
                   label: 'Sign In with Google',
-                  onPressed: () {},
+                  onPressed: () {
+                    userViewModel.signInWithGoogle();
+                  },
                   color: Colors.white,
                   textColor: Colors.black,
                   widthFactor: 1,

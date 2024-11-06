@@ -45,8 +45,8 @@ class UserViewModel extends ChangeNotifier {
         _saveUserSession(_user!.uid);
         Get.snackbar('Success', 'Sign up successful!',
             snackPosition: SnackPosition.BOTTOM);
-        // Navigate to home page
-        Get.offNamed('/home'); 
+
+        Get.offNamed('/home');
       }
     } catch (e) {
       String errorMessage = _getErrorMessage(e);
@@ -70,8 +70,8 @@ class UserViewModel extends ChangeNotifier {
         _saveUserSession(_user!.uid);
         Get.snackbar('Success', 'Sign in successful!',
             snackPosition: SnackPosition.BOTTOM);
-        // Navigate to home page
-        Get.offNamed('/home'); 
+
+        Get.offNamed('/home');
       }
     } catch (e) {
       String errorMessage = _getErrorMessage(e);
@@ -88,14 +88,19 @@ class UserViewModel extends ChangeNotifier {
         _saveUserSession(_user!.uid);
         Get.snackbar('Success', 'Google sign-in successful!',
             snackPosition: SnackPosition.BOTTOM);
-        // Navigate to home page
-        Get.offNamed('/home'); 
+
+        Get.offNamed('/home');
       }
     } catch (e) {
       String errorMessage = _getErrorMessage(e);
       Get.snackbar('Error', errorMessage, snackPosition: SnackPosition.BOTTOM);
     }
     notifyListeners();
+  }
+
+  // Twitter Sign-In method
+  Future<void> signInWithTwitter() async{
+    
   }
 
   // Sign out method
@@ -105,7 +110,7 @@ class UserViewModel extends ChangeNotifier {
     _clearUserSession();
     notifyListeners();
     // Optionally navigate to the login page
-    Get.offNamed('/login'); 
+    Get.offNamed('/sign-in');
   }
 
   // Validate password format

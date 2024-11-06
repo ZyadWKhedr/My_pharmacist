@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:healio/core/const.dart';
 import 'package:healio/core/routes/routers.dart';
 import 'package:healio/core/routes/routes.dart';
+import 'package:healio/view_model/article_provider.dart';
+import 'package:healio/view_model/medicine_provider.dart';
 import 'package:healio/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -17,9 +19,13 @@ Future<void> main() async {
     apiKey: dotenv.env["GEMINI_API_KEY"]!,
   );
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => UserViewModel(),
-      child: MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserViewModel()),  
+        ChangeNotifierProvider(create: (_) => ArticleViewModel()),  
+        ChangeNotifierProvider(create: (_) => MedicineViewModel()),  
+      ],
+      child: const MyApp(),
     ),
   );
 }

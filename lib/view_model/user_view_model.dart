@@ -98,11 +98,6 @@ class UserViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Twitter Sign-In method
-  Future<void> signInWithTwitter() async{
-    
-  }
-
   // Sign out method
   Future<void> signOut() async {
     await _userRepository.signOut();

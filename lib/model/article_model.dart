@@ -13,10 +13,10 @@ class Article {
   // Factory constructor to parse JSON data
   factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
-      id: json['id'],
-      title: json['title'],
-      photo: json['photo'],
-      link: json['link'],
+      id: json['id'] ?? '',
+      title: json['title'] ?? 'title',
+      photo: json['imageUrl'] ?? '',
+      link: json['articleLink'] ?? '',
     );
   }
 

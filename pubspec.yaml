@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animated_text_kit: ^4.2.2
+  carousel_slider: ^5.0.0
   cloud_firestore: ^5.4.4
   cupertino_icons: ^1.0.8
   dash_chat_2: ^0.0.21
@@ -47,15 +48,14 @@ dependencies:
   lottie: ^3.1.0
   provider: ^6.1.2
   shared_preferences: ^2.3.2
-  twitter_login: ^4.4.2
+  url_launcher: ^6.3.1
 
 flutter_native_splash:
   android: true
   ios: true
   web: false
-  color: "#B3D6ED"  
-  image: assets/images/Logo 1.png  
-
+  color: "#B3D6ED"
+  image: assets/images/Logo 1.png
 
 dev_dependencies:
   flutter_lints: ^4.0.0

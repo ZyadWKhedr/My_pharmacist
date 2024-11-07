@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healio/core/const.dart';
+import 'package:healio/view/medicines_list/medicine_list_page.dart';
 import 'package:healio/view_model/medicine_provider.dart';
 
 class DrugCategoryList extends StatelessWidget {
@@ -11,18 +12,11 @@ class DrugCategoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: backgroungColor,
         borderRadius: BorderRadius.circular(12.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        boxShadow: [],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,15 +29,14 @@ class DrugCategoryList extends StatelessWidget {
               color: lightBlue,
             ),
           ),
-          const SizedBox(height: 10.0),
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
-              childAspectRatio: 1.5,
+              crossAxisSpacing: 32.0,
+              mainAxisSpacing: 16.0,
+              childAspectRatio: 1.2,
             ),
             itemCount: medicinesViewModel.categories.length,
             itemBuilder: (context, index) {
@@ -51,42 +44,56 @@ class DrugCategoryList extends StatelessWidget {
               String imageUrl =
                   medicinesViewModel.getCategoryImageUrl(category);
 
-              return Container(
-                width: double.infinity,
-                height: 270.0,
-                padding: const EdgeInsets.symmetric(
-                    vertical: 16.0, horizontal: 16.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.network(
-                        imageUrl,
-                        height: 60.0,
-                        fit: BoxFit.cover,
+              return GestureDetector(
+                onTap: () {
+                  // Navigate to the MedicinesListPage with the selected category
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MedicineListPage(
+                        selectedCategory: category,
                       ),
-                      const SizedBox(height: 2.0),
-                      Text(
-                        category,
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 270.0,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
                       ),
                     ],
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.network(
+                          imageUrl,
+                          width: MediaQuery.of(context).size.width,
+                          height: 80.0,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(height: 12.0),
+                        Text(
+                          category,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500,
+                            color: lightBlue,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

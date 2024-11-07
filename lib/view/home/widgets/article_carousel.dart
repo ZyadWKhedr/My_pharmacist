@@ -23,13 +23,13 @@ class _ArticleCarouselState extends State<ArticleCarousel> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 300.0,
+            height: 350.0,
             enlargeCenterPage: true,
             viewportFraction: 1.0,
             enableInfiniteScroll: true,
             autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 4),
-            autoPlayAnimationDuration: const Duration(milliseconds: 800),
+            autoPlayInterval: const Duration(seconds: 6),
+            autoPlayAnimationDuration: const Duration(milliseconds: 1000),
             autoPlayCurve: Curves.easeInOut,
             onPageChanged: (index, reason) {
               setState(() {
@@ -58,17 +58,19 @@ class _ArticleCarouselState extends State<ArticleCarousel> {
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: () => _launchURL(article.link),
+                        onTap: () =>
+                            _launchURL(Uri.parse(article.link)), // Corrected
                         child: Image.network(
                           article.photo,
                           width: double.infinity,
-                          height: 200.0,
+                          height: 244.0,
                           fit: BoxFit.cover,
                         ),
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 30.0),
                       GestureDetector(
-                        onTap: () => _launchURL(article.link),
+                        onTap: () =>
+                            _launchURL(Uri.parse(article.link)), // Corrected
                         child: Text(
                           article.title,
                           textAlign: TextAlign.start,
@@ -103,11 +105,18 @@ class _ArticleCarouselState extends State<ArticleCarousel> {
   }
 
   // Function to launch URL
-  Future<void> _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+  Future<void> _launchURL(Uri url) async {
+    try {
+      final uri = Uri.parse(url.toString());
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+        print('Launching URL: ${url.toString()}');
+      } else {
+        throw 'Could not launch $uri';
+      }
+    } catch (e) {
+      print('Error: $e');
     }
+    
   }
 }

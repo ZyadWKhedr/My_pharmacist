@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:healio/core/const.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GeminiChatPage extends StatefulWidget {
@@ -13,8 +14,8 @@ class GeminiChatPage extends StatefulWidget {
 }
 
 class _GeminiChatPageState extends State<GeminiChatPage> {
-  final Gemini gemini = Gemini.instance; 
-  List<ChatMessage> messages = []; // List to hold chat messages
+  final Gemini gemini = Gemini.instance;
+  List<ChatMessage> messages = [];
 
   // Define users
   ChatUser currentUser = ChatUser(id: "0", firstName: "User");
@@ -25,72 +26,99 @@ class _GeminiChatPageState extends State<GeminiChatPage> {
         "https://seeklogo.com/images/G/google-gemini-logo-A5787B2669-seeklogo.com.png",
   );
 
+  TextEditingController _controller = TextEditingController();
+  double _fontSize = 16.0; // Default font size
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Chat with AI"),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: AppBar(
+          backgroundColor: lightBlue,
+          centerTitle: true,
+          title: const Text(
+            "My Pharmacist AI",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
-      body: _buildUI(), // Build the chat UI
+      body: _buildUI(),
     );
   }
 
   Widget _buildUI() {
     return DashChat(
       inputOptions: InputOptions(
+        inputTextStyle: const TextStyle(fontSize: 16, color: Colors.black),
+        inputDecoration: InputDecoration(
+          hintText: 'Type a message...',
+          hintStyle: TextStyle(fontSize: 16, color: Colors.grey[600]),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(color: Colors.black, width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: BorderSide(color: lightBlue, width: 2),
+          ),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+        ),
         trailing: [
-          // Button to send media messages
           IconButton(
             onPressed: _sendMediaMessage,
             icon: const Icon(Icons.image),
           ),
         ],
       ),
-      currentUser: currentUser, 
+      messageOptions: MessageOptions(
+        currentUserContainerColor: lightBlue,
+        textColor: Colors.white,
+        containerColor: Colors.black,
+        messagePadding:
+            const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+      ),
+
+      currentUser: currentUser,
       onSend: _sendMessage, // Function to call when sending a message
       messages: messages, // List of messages
     );
   }
 
   void _sendMessage(ChatMessage chatMessage) {
-    // Add the sent message to the list
     setState(() {
       messages = [chatMessage, ...messages];
     });
 
     try {
-      String question = chatMessage.text; // Get the message text
+      String question = chatMessage.text;
       List<Uint8List>? images;
 
-      // If the message contains media, read the image file
       if (chatMessage.medias?.isNotEmpty ?? false) {
         images = [
           File(chatMessage.medias!.first.url).readAsBytesSync(),
         ];
       }
 
-      // Send the question to Gemini and listen for a response
       gemini.streamGenerateContent(question, images: images).listen((event) {
-       
         String response = event.content?.parts?.fold(
                 "", (previous, current) => "$previous ${current.text}") ??
             "";
 
-        // Create a new chat message with the AI's response
         ChatMessage message = ChatMessage(
           user: geminiUser,
           createdAt: DateTime.now(),
           text: response,
         );
 
-        // Update the message list with the AI's response
         setState(() {
           messages = [message, ...messages];
         });
       });
     } catch (e) {
-      
       print(e);
     }
   }
@@ -98,11 +126,9 @@ class _GeminiChatPageState extends State<GeminiChatPage> {
   void _sendMediaMessage() async {
     ImagePicker picker = ImagePicker();
     XFile? file = await picker.pickImage(
-      source:
-          ImageSource.gallery, // Allow user to select an image from the gallery
+      source: ImageSource.gallery,
     );
 
-    // If an image is selected, create a chat message for it
     if (file != null) {
       ChatMessage chatMessage = ChatMessage(
         user: currentUser,
@@ -116,7 +142,7 @@ class _GeminiChatPageState extends State<GeminiChatPage> {
           )
         ],
       );
-      _sendMessage(chatMessage); // Send the media message
+      _sendMessage(chatMessage);
     }
   }
 }

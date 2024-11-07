@@ -12,18 +12,23 @@ import 'package:healio/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
+
   await WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await dotenv.load(fileName: "assets/.env");
+
+ 
   Gemini.init(
     apiKey: dotenv.env["GEMINI_API_KEY"]!,
   );
+
+
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => UserViewModel()),  
-        ChangeNotifierProvider(create: (_) => ArticleViewModel()),  
-        ChangeNotifierProvider(create: (_) => MedicineViewModel()),  
+        ChangeNotifierProvider(create: (_) => UserViewModel()),
+        ChangeNotifierProvider(create: (_) => ArticleViewModel()),
+        ChangeNotifierProvider(create: (_) => MedicineViewModel()),
       ],
       child: const MyApp(),
     ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healio/core/const.dart';
+import 'package:healio/view_model/medicine_provider.dart';
+import 'package:provider/provider.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({super.key});
@@ -9,7 +11,7 @@ class CustomSearchBar extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.only(right: 10),
       child: SizedBox(
         width: screenWidth * 0.8,
         height: 50,
@@ -18,8 +20,7 @@ class CustomSearchBar extends StatelessWidget {
             hintText: 'Search for a drug...',
             hintStyle: const TextStyle(color: Color(0xff003356)),
             prefixIcon: const Icon(Icons.search, color: Color(0xff003356)),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
+            contentPadding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide: BorderSide(color: lightBlue, width: 2.0),
@@ -35,7 +36,10 @@ class CustomSearchBar extends StatelessWidget {
             filled: true,
             fillColor: Colors.grey[200],
           ),
-          onChanged: (value) {},
+          onChanged: (value) {
+            // Call the searchMedicines method from the MedicineViewModel
+            context.read<MedicineViewModel>().searchMedicines(value);
+          },
         ),
       ),
     );

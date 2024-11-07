@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:healio/core/const.dart';
@@ -61,8 +62,8 @@ class CustomNavigationBar extends StatelessWidget {
             text: 'Reminders',
           ),
           GButton(
-            icon: Icons.person_2_rounded,
-            text: 'Profile',
+            icon: CupertinoIcons.heart,
+            text: 'Favourites',
           ),
         ],
       ),

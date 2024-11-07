@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healio/core/const.dart';
+import 'package:healio/view/favourites_page.dart';
 import 'package:healio/view/gemini_chat/gemini_chat_page.dart';
 import 'package:healio/view/home/widgets/article_carousel.dart';
 import 'package:healio/view/home/widgets/custom_navigation_bar.dart';
 import 'package:healio/view/home/widgets/cutom_drawer.dart';
 import 'package:healio/view/home/widgets/drug_category_list.dart';
 import 'package:healio/view/home/widgets/search_bar.dart';
-import 'package:healio/view/profile_page.dart';
 import 'package:healio/view/reminders/reminders_page.dart';
 import 'package:healio/view_model/article_provider.dart';
 import 'package:healio/view_model/medicine_provider.dart';
@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     const HomeContent(),
     const GeminiChatPage(),
     const RemindersPage(),
-    const ProfilePage(),
+    const FavouritesPage(),
   ];
 
   @override

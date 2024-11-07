@@ -12,6 +12,10 @@ class UserViewModel extends ChangeNotifier {
 
   bool get isSignedIn => _user != null;
 
+  String get userEmail => _user?.email ?? 'No email';
+
+  String get userName => _user?.displayName ?? 'Person';
+
   UserViewModel() {
     loadUserSession();
   }

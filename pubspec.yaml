@@ -28,7 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  animated_text_kit: ^4.2.2
   carousel_slider: ^5.0.0
   cloud_firestore: ^5.4.4
   cupertino_icons: ^1.0.8
@@ -48,6 +47,7 @@ dependencies:
   lottie: ^3.1.0
   provider: ^6.1.2
   shared_preferences: ^2.3.2
+  smooth_page_indicator: ^1.2.0+3
   url_launcher: ^6.3.1
 
 flutter_native_splash:

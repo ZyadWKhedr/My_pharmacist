@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     const HomeContent(),
     const GeminiChatPage(),
     const RemindersPage(),
-    const FavouritesPage(),
+    const FavoritesPage(),
   ];
 
   @override

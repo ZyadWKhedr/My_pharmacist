@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healio/core/const.dart';
 import 'package:healio/core/widgets/custom_button.dart';
+import 'package:healio/database/database_helper_class.dart';
 import 'package:healio/model/medicine_model.dart';
 
 class MedicineContainer extends StatelessWidget {
@@ -14,12 +15,11 @@ class MedicineContainer extends StatelessWidget {
     List<String> lines = [];
 
     for (int i = 0; i < words.length; i += 3) {
-      // Create a group of three words or whatever remains
       int end = (i + 3 < words.length) ? i + 3 : words.length;
       lines.add(words.sublist(i, end).join(' '));
     }
 
-    return lines.join('\n'); // Join lines with a line break
+    return lines.join('\n');
   }
 
   @override
@@ -44,7 +44,6 @@ class MedicineContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Medical Name
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
@@ -57,7 +56,6 @@ class MedicineContainer extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-
             // Medicine Image
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
@@ -88,7 +86,6 @@ class MedicineContainer extends StatelessWidget {
                       ),
               ),
             ),
-
             // Type, Dosage, and Side Effects Row
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
@@ -101,23 +98,6 @@ class MedicineContainer extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Precautions and Interactions Row
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildInfoColumn('Precautions', medicine.precautions),
-                  _buildInfoColumn('Interactions', medicine.interactions),
-                ],
-              ),
-            ),
-
-            SizedBox(
-              height: 20,
-            ),
-
             // Favorite and Add to Reminder Buttons
             Column(
               children: [
@@ -133,8 +113,29 @@ class MedicineContainer extends StatelessWidget {
                   label: "Favourite",
                   color: Colors.transparent,
                   textColor: lightBlue,
-                  onPressed: () {
-                    // Add your favourite button action here
+                  onPressed: () async {
+                    bool isMedicineSaved = await DatabaseHelper.isMedicineSaved(
+                        medicine.id);
+                    if (isMedicineSaved) {
+                      // Show Snackbar if already saved
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              '${medicine.commercialName} is already in your favorites!'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    } else {
+                      await DatabaseHelper.insertMedicine(medicine);
+                      // Show Snackbar indicating success
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              '${medicine.commercialName} added to favorites!'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
                   },
                 ),
               ],
@@ -145,20 +146,19 @@ class MedicineContainer extends StatelessWidget {
     );
   }
 
-  // Helper method to build info columns for Type, Dosage, etc.
   Widget _buildInfoColumn(String label, String value) {
     return Column(
       children: [
         Text(
-          splitText(value), // Split the value into 3-word chunks
+          splitText(value),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
             color: lightBlue,
           ),
           textAlign: TextAlign.center,
-          maxLines: 3, // Limit to 3 lines
-          overflow: TextOverflow.ellipsis, // Handle overflow
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
         ),
         Text(
           label,

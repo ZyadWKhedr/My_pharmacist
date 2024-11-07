@@ -19,11 +19,43 @@ class Medicine {
     required this.type,
     required this.category,
     required this.description,
-    this.imageUrl, 
+    this.imageUrl,
     required this.sideEffects,
     required this.precautions,
     required this.interactions,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'commercialName': commercialName,
+      'medicalName': medicalName,
+      'dosage': dosage,
+      'type': type,
+      'category': category,
+      'description': description,
+      'imageUrl': imageUrl, 
+      'sideEffects': sideEffects,
+      'precautions': precautions,
+      'interactions': interactions,
+    };
+  }
+
+  factory Medicine.fromMap(Map<String, dynamic> map) {
+    return Medicine(
+      id: map['id'] ?? '',
+      commercialName: map['commercialName'] ?? '',
+      medicalName: map['medicalName'] ?? '',
+      dosage: map['dosage'] ?? '',
+      type: map['type'] ?? '',
+      category: map['category'] ?? '',
+      description: map['description'] ?? '',
+      imageUrl: map['imageUrl'], 
+      sideEffects: map['sideEffects'] ?? '',
+      precautions: map['precautions'] ?? '',
+      interactions: map['interactions'] ?? '',
+    );
+  }
 
   factory Medicine.fromJson(Map<String, dynamic> json) {
     return Medicine(
@@ -34,7 +66,7 @@ class Medicine {
       type: json['type'] ?? '',
       category: json['category'] ?? '',
       description: json['description'] ?? '',
-      imageUrl: json['imageUrl'], 
+      imageUrl: json['imageUrl'],
       sideEffects: json['sideEffects'] ?? '',
       precautions: json['precautions'] ?? '',
       interactions: json['interactions'] ?? '',

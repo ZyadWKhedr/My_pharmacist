@@ -25,7 +25,7 @@ class UserViewModel extends ChangeNotifier {
     // Check for empty fields
     if (email.isEmpty || password.isEmpty || username.isEmpty) {
       Get.snackbar('Error', 'All fields must be filled out.',
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP);
       return;
     }
 
@@ -37,7 +37,7 @@ class UserViewModel extends ChangeNotifier {
     if (!_isValidPassword(password)) {
       Get.snackbar('Error',
           'Password must be at least 8 characters long, include uppercase, lowercase, number, and special character.',
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP);
       return;
     }
 
@@ -48,13 +48,13 @@ class UserViewModel extends ChangeNotifier {
       if (_user != null) {
         _saveUserSession(_user!.uid);
         Get.snackbar('Success', 'Sign up successful!',
-            snackPosition: SnackPosition.BOTTOM);
+            snackPosition: SnackPosition.TOP);
 
         Get.offNamed('/home');
       }
     } catch (e) {
       String errorMessage = _getErrorMessage(e);
-      Get.snackbar('Error', errorMessage, snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', errorMessage, snackPosition: SnackPosition.TOP);
     }
     notifyListeners();
   }
@@ -64,7 +64,7 @@ class UserViewModel extends ChangeNotifier {
     // Check for empty fields
     if (email.isEmpty || password.isEmpty) {
       Get.snackbar('Error', 'Email and password must be filled out.',
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP);
       return;
     }
 
@@ -73,13 +73,13 @@ class UserViewModel extends ChangeNotifier {
       if (_user != null) {
         _saveUserSession(_user!.uid);
         Get.snackbar('Success', 'Sign in successful!',
-            snackPosition: SnackPosition.BOTTOM);
+            snackPosition: SnackPosition.TOP);
 
         Get.offNamed('/home');
       }
     } catch (e) {
       String errorMessage = _getErrorMessage(e);
-      Get.snackbar('Error', errorMessage, snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', errorMessage, snackPosition: SnackPosition.TOP);
     }
     notifyListeners();
   }
@@ -91,13 +91,13 @@ class UserViewModel extends ChangeNotifier {
       if (_user != null) {
         _saveUserSession(_user!.uid);
         Get.snackbar('Success', 'Google sign-in successful!',
-            snackPosition: SnackPosition.BOTTOM);
+            snackPosition: SnackPosition.TOP);
 
         Get.offNamed('/home');
       }
     } catch (e) {
       String errorMessage = _getErrorMessage(e);
-      Get.snackbar('Error', errorMessage, snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', errorMessage, snackPosition: SnackPosition.TOP);
     }
     notifyListeners();
   }
@@ -160,6 +160,6 @@ class UserViewModel extends ChangeNotifier {
               'An unknown error occurred in authentication.';
       }
     }
-    return 'An unknown error occurred. $error';
+    return '$error';
   }
 }

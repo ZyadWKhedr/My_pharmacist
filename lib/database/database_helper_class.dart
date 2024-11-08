@@ -20,7 +20,7 @@ class DatabaseHelper {
 
     return openDatabase(
       path,
-      version: 2, // Incremented version number
+      version: 2,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE medicines( 

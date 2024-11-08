@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:healio/core/const.dart';
 import 'package:healio/core/widgets/custom_button.dart';
 import 'package:healio/database/database_helper_class.dart';
@@ -86,7 +88,7 @@ class MedicineContainer extends StatelessWidget {
                       ),
               ),
             ),
-            // Type, Dosage, and Side Effects Row
+            // Type, Dosage, and Side Effects
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Row(
@@ -104,9 +106,7 @@ class MedicineContainer extends StatelessWidget {
                 CustomButton(
                   label: "Add to Reminder",
                   color: lightBlue,
-                  onPressed: () {
-                    // Add your reminder button action here
-                  },
+                  onPressed: () {},
                 ),
                 const SizedBox(height: 15.0),
                 CustomButton(
@@ -114,26 +114,28 @@ class MedicineContainer extends StatelessWidget {
                   color: Colors.transparent,
                   textColor: lightBlue,
                   onPressed: () async {
-                    bool isMedicineSaved = await DatabaseHelper.isMedicineSaved(
-                        medicine.id);
+                    bool isMedicineSaved =
+                        await DatabaseHelper.isMedicineSaved(medicine.id);
                     if (isMedicineSaved) {
                       // Show Snackbar if already saved
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                              '${medicine.commercialName} is already in your favorites!'),
-                          duration: Duration(seconds: 2),
-                        ),
+                      Get.snackbar(
+                        '${medicine.commercialName} is already saved to favourites', // Title of the snackbar
+                        'Notice',
+                        snackPosition: SnackPosition.TOP,
+                        duration: Duration(milliseconds: 1000),
+                        backgroundColor: Color.fromARGB(255, 0, 158, 82),
+                        colorText: Colors.white,
                       );
                     } else {
                       await DatabaseHelper.insertMedicine(medicine);
                       // Show Snackbar indicating success
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                              '${medicine.commercialName} added to favorites!'),
-                          duration: Duration(seconds: 2),
-                        ),
+                      Get.snackbar(
+                        'Success',
+                        '${medicine.commercialName} added to favorites!',
+                        snackPosition: SnackPosition.TOP,
+                        duration: Duration(milliseconds: 1020),
+                        backgroundColor: const Color.fromARGB(255, 0, 158, 82),
+                        colorText: Colors.white,
                       );
                     }
                   },

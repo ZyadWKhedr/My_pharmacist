@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:healio/core/const.dart';
 import 'package:healio/core/widgets/custom_button.dart';
 import 'package:healio/database/database_helper_class.dart';
@@ -37,7 +38,14 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorites'),
+        backgroundColor: lightBlue,
+        centerTitle: true,
+        title: const Text(
+          'Favorites',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
       body: FutureBuilder<List<Medicine>>(
         future: _medicinesFuture,
@@ -104,7 +112,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                     if (loadingProgress == null) {
                                       return child;
                                     } else {
-                                      return Center(
+                                      return const Center(
                                           child: CircularProgressIndicator());
                                     }
                                   },
@@ -141,6 +149,15 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         onPressed: () async {
                           // Remove from database
                           await DatabaseHelper.deleteMedicine(medicine.id!);
+                          Get.snackbar(
+                            'Deleted Successfully',
+                            '${medicine.commercialName} ',
+                            snackPosition: SnackPosition.TOP,
+                            duration: const Duration(milliseconds: 1020),
+                            backgroundColor:
+                                const Color.fromARGB(255, 155, 3, 3),
+                            colorText: Colors.white,
+                          );
 
                           // Refresh the list by calling setState
                           setState(() {
@@ -175,7 +192,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         ),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 10,
             fontWeight: FontWeight.w700,
           ),

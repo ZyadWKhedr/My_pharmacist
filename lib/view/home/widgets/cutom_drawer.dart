@@ -34,7 +34,6 @@ class CustomDrawer extends StatelessWidget {
             title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/home');
             },
           ),
           ListTile(

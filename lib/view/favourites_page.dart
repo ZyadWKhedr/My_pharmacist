@@ -44,6 +44,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           'Favorites',
           style: TextStyle(
             color: Colors.white,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),
@@ -144,8 +145,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       // Delete Button
                       CustomButton(
                         label: "Delete",
-                        color: Colors.red,
-                        textColor: Colors.white,
+                        color: Colors.transparent,
+                        textColor: orange,
+                        borderColor: orange,
                         onPressed: () async {
                           // Remove from database
                           await DatabaseHelper.deleteMedicine(medicine.id);

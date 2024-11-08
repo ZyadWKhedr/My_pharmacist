@@ -36,9 +36,18 @@ class _MedicineListPageState extends State<MedicineListPage> {
       appBar: PreferredSize(
         preferredSize: Size.fromRadius(30),
         child: AppBar(
-          backgroundColor: lightBlue,
+          backgroundColor: backgroungColor,
           centerTitle: true,
-          title: Text(widget.selectedCategory),
+          title: Text(
+            widget.selectedCategory,
+            style: TextStyle(
+              color: lightBlue,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          leading: BackButton(
+            color: lightBlue,
+          ),
         ),
       ),
       body: Consumer<MedicineViewModel>(builder: (context, viewModel, child) {

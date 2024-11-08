@@ -4,7 +4,7 @@ import 'package:healio/core/const.dart';
 import 'package:healio/view/favourites_page.dart';
 import 'package:healio/view/gemini_chat/gemini_chat_page.dart';
 import 'package:healio/view/home/widgets/article_carousel.dart';
-import 'package:healio/view/home/widgets/custom_navigation_bar.dart';
+import 'package:healio/core/widgets/custom_navigation_bar.dart';
 import 'package:healio/view/home/widgets/cutom_drawer.dart';
 import 'package:healio/view/home/widgets/drug_category_list.dart';
 import 'package:healio/view/home/widgets/search_bar.dart';

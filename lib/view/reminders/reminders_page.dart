@@ -70,8 +70,6 @@ class _RemindersPageState extends State<RemindersPage> {
     print('Reminder set for: $selectedDate');
   }
 
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +78,7 @@ class _RemindersPageState extends State<RemindersPage> {
           'Reminders',
           style: TextStyle(
             color: Colors.white,
+            fontWeight: FontWeight.w700,
           ),
         ),
         centerTitle: true,
@@ -106,25 +105,26 @@ class _RemindersPageState extends State<RemindersPage> {
                   margin: const EdgeInsets.all(10),
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    border: Border.all(color: lightBlue),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3), 
-                      ),
-                    ],
-                  ),
+                      border: Border.all(color: lightBlue),
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                      color: backgroungColor),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         reminder.commercialName,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
+                          color: lightBlue,
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -152,8 +152,9 @@ class _RemindersPageState extends State<RemindersPage> {
                           CustomButton(
                             widthFactor: 0.3,
                             label: "Delete",
+                            borderColor: orange,
                             color: Colors.transparent,
-                            textColor: Colors.white,
+                            textColor: orange,
                             onPressed: () async {
                               // Remove from database
                               await DatabaseHelper.deleteReminder(reminder.id!);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:healio/core/const.dart';
 import 'package:healio/core/widgets/custom_button.dart';
 import 'package:healio/database/database_helper_class.dart';
@@ -9,7 +8,7 @@ import 'package:healio/model/medicine_model.dart';
 class MedicineContainer extends StatelessWidget {
   final Medicine medicine;
 
-  const MedicineContainer({Key? key, required this.medicine}) : super(key: key);
+  const MedicineContainer({super.key, required this.medicine});
 
   // Helper function to split text into groups of three words
   String splitText(String text) {
@@ -74,7 +73,7 @@ class MedicineContainer extends StatelessWidget {
                           if (loadingProgress == null) {
                             return child;
                           } else {
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(child: CircularProgressIndicator());
                           }
                         },
                         errorBuilder: (context, error, stackTrace) {
@@ -106,7 +105,32 @@ class MedicineContainer extends StatelessWidget {
                 CustomButton(
                   label: "Add to Reminder",
                   color: lightBlue,
-                  onPressed: () {},
+                  onPressed: () async {
+                    bool isMedicineInReminders =
+                        await DatabaseHelper.isMedicineInReminders(medicine.id);
+                    if (isMedicineInReminders) {
+                      // Show Snackbar if already added to reminders
+                      Get.snackbar(
+                        '${medicine.commercialName} is already added to reminders', // Title of the snackbar
+                        'Notice',
+                        snackPosition: SnackPosition.TOP,
+                        duration: const Duration(milliseconds: 1000),
+                        backgroundColor: const Color.fromARGB(255, 0, 158, 82),
+                        colorText: Colors.white,
+                      );
+                    } else {
+                      await DatabaseHelper.insertReminder(medicine);
+                      // Show Snackbar indicating success
+                      Get.snackbar(
+                        'Success',
+                        '${medicine.commercialName} added to reminders!',
+                        snackPosition: SnackPosition.TOP,
+                        duration: const Duration(milliseconds: 1020),
+                        backgroundColor: const Color.fromARGB(255, 0, 158, 82),
+                        colorText: Colors.white,
+                      );
+                    }
+                  },
                 ),
                 const SizedBox(height: 15.0),
                 CustomButton(
@@ -122,8 +146,8 @@ class MedicineContainer extends StatelessWidget {
                         '${medicine.commercialName} is already saved to favourites', // Title of the snackbar
                         'Notice',
                         snackPosition: SnackPosition.TOP,
-                        duration: Duration(milliseconds: 1000),
-                        backgroundColor: Color.fromARGB(255, 0, 158, 82),
+                        duration: const Duration(milliseconds: 1000),
+                        backgroundColor: const Color.fromARGB(255, 0, 158, 82),
                         colorText: Colors.white,
                       );
                     } else {
@@ -133,7 +157,7 @@ class MedicineContainer extends StatelessWidget {
                         'Success',
                         '${medicine.commercialName} added to favorites!',
                         snackPosition: SnackPosition.TOP,
-                        duration: Duration(milliseconds: 1020),
+                        duration: const Duration(milliseconds: 1020),
                         backgroundColor: const Color.fromARGB(255, 0, 158, 82),
                         colorText: Colors.white,
                       );
@@ -164,7 +188,7 @@ class MedicineContainer extends StatelessWidget {
         ),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 10,
             fontWeight: FontWeight.w700,
           ),

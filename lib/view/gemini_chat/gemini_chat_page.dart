@@ -26,9 +26,6 @@ class _GeminiChatPageState extends State<GeminiChatPage> {
         "https://seeklogo.com/images/G/google-gemini-logo-A5787B2669-seeklogo.com.png",
   );
 
-  TextEditingController _controller = TextEditingController();
-  double _fontSize = 16.0; // Default font size
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,8 +80,8 @@ class _GeminiChatPageState extends State<GeminiChatPage> {
       ),
 
       currentUser: currentUser,
-      onSend: _sendMessage, // Function to call when sending a message
-      messages: messages, // List of messages
+      onSend: _sendMessage, 
+      messages: messages, 
     );
   }
 

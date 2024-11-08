@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const HomeContent(),
     const GeminiChatPage(),
-    const RemindersPage(),
+    RemindersPage(),
     const FavoritesPage(),
   ];
 

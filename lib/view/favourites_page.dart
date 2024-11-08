@@ -148,7 +148,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         textColor: Colors.white,
                         onPressed: () async {
                           // Remove from database
-                          await DatabaseHelper.deleteMedicine(medicine.id!);
+                          await DatabaseHelper.deleteMedicine(medicine.id);
                           Get.snackbar(
                             'Deleted Successfully',
                             '${medicine.commercialName} ',

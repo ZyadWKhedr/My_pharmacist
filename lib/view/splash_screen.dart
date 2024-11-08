@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -51,9 +51,6 @@ class _SplashScreenState extends State<SplashScreen> {
           duration: const Duration(seconds: 1),
           child: Image.asset(
             'assets/images/Logo 1.png',
-            // Optionally specify height and width
-            // height: 100,
-            // width: 100,
           ),
         ),
       ),

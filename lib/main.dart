@@ -6,14 +6,18 @@ import 'package:get/get.dart';
 import 'package:healio/core/const.dart';
 import 'package:healio/core/routes/routers.dart';
 import 'package:healio/core/routes/routes.dart';
+import 'package:healio/notifications/notifications.dart';
 import 'package:healio/view_model/article_provider.dart';
 import 'package:healio/view_model/medicine_provider.dart';
 import 'package:healio/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 Future<void> main() async {
   await WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await NotificationService.init();
+  tz.initializeTimeZones();
   await dotenv.load(fileName: "assets/.env");
   Gemini.init(
     apiKey: dotenv.env["GEMINI_API_KEY"]!,

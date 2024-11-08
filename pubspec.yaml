@@ -38,6 +38,7 @@ dependencies:
     sdk: flutter
   flutter_dotenv: ^5.2.1
   flutter_gemini: ^2.0.5
+  flutter_local_notifications: ^18.0.0
   get: ^4.6.6
   google_fonts: ^6.2.1
   google_nav_bar: ^5.0.7
@@ -45,12 +46,14 @@ dependencies:
   hive: ^2.2.3
   http: ^1.2.2
   image_picker: ^1.1.2
+  intl: ^0.19.0
   lottie: ^3.1.0
   path_provider: ^2.1.5
   provider: ^6.1.2
   shared_preferences: ^2.3.2
   smooth_page_indicator: ^1.2.0+3
   sqflite: ^2.4.0
+  timezone: ^0.10.0
   url_launcher: ^6.3.1
 
 flutter_native_splash:

@@ -39,7 +39,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.onboarding,
       page: () => OnboardingScreen(),
-      transition: Transition.native,
+      transition: Transition.fade,
     ),
     GetPage(
       name: AppRoutes.aiChat,

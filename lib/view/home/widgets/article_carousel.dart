@@ -23,9 +23,9 @@ class _ArticleCarouselState extends State<ArticleCarousel> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 350.0,
+            height: 340.0,
             enlargeCenterPage: true,
-            viewportFraction: 1.0,
+            viewportFraction: 1.1,
             enableInfiniteScroll: true,
             autoPlay: true,
             autoPlayInterval: const Duration(seconds: 6),
@@ -42,41 +42,39 @@ class _ArticleCarouselState extends State<ArticleCarousel> {
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 8,
-                        offset: const Offset(0, 4),
+                        offset: const Offset(0, 5),
                       ),
                     ],
                   ),
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: () =>
-                            _launchURL(Uri.parse(article.link)), // Corrected
+                        onTap: () => _launchURL(Uri.parse(article.link)),
                         child: Image.network(
                           article.photo,
                           width: double.infinity,
-                          height: 244.0,
+                          height: 240.0,
                           fit: BoxFit.cover,
                         ),
                       ),
-                      const SizedBox(height: 30.0),
+                      const SizedBox(height: 20.0),
                       GestureDetector(
-                        onTap: () =>
-                            _launchURL(Uri.parse(article.link)), // Corrected
+                        onTap: () => _launchURL(Uri.parse(article.link)),
                         child: Text(
                           article.title,
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             color: lightBlue,
-                            fontSize: 20.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
@@ -107,16 +105,11 @@ class _ArticleCarouselState extends State<ArticleCarousel> {
   // Function to launch URL
   Future<void> _launchURL(Uri url) async {
     try {
-      final uri = Uri.parse(url.toString());
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri);
-        print('Launching URL: ${url.toString()}');
-      } else {
-        throw 'Could not launch $uri';
-      }
+      setState(() {
+        launchUrl(url, mode: LaunchMode.externalApplication);
+      });
     } catch (e) {
       print('Error: $e');
     }
-    
   }
 }

@@ -10,14 +10,35 @@ class MedicineContainer extends StatelessWidget {
 
   const MedicineContainer({super.key, required this.medicine});
 
-  // Helper function to split text into groups of three words
+  // Helper function to split text into groups of three words or move long words to a new line
   String splitText(String text) {
     List<String> words = text.split(' ');
     List<String> lines = [];
+    List<String> currentLine = [];
 
-    for (int i = 0; i < words.length; i += 3) {
-      int end = (i + 3 < words.length) ? i + 3 : words.length;
-      lines.add(words.sublist(i, end).join(' '));
+    for (int i = 0; i < words.length; i++) {
+      String word = words[i];
+
+      // If the word is longer than 10 characters, start a new line
+      if (word.length > 10) {
+        if (currentLine.isNotEmpty) {
+          lines.add(currentLine.join(' '));
+          currentLine.clear();
+        }
+        lines.add(word); // Add the long word to its own line
+      } else {
+        currentLine.add(word);
+        // If the current line reaches 3 words, add it to the lines and start a new one
+        if (currentLine.length == 3) {
+          lines.add(currentLine.join(' '));
+          currentLine.clear();
+        }
+      }
+    }
+
+    // Add any remaining words in the current line to the lines
+    if (currentLine.isNotEmpty) {
+      lines.add(currentLine.join(' '));
     }
 
     return lines.join('\n');
@@ -73,7 +94,8 @@ class MedicineContainer extends StatelessWidget {
                           if (loadingProgress == null) {
                             return child;
                           } else {
-                            return const Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
                         },
                         errorBuilder: (context, error, stackTrace) {
@@ -90,12 +112,41 @@ class MedicineContainer extends StatelessWidget {
             // Type, Dosage, and Side Effects
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildInfoColumn('Type', medicine.type),
-                  _buildInfoColumn('Dosage', medicine.dosage),
-                  _buildInfoColumn('Side Effects', medicine.sideEffects),
+                  Text(
+                    medicine.description,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: lightBlue,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildInfoColumn('Type', medicine.type),
+                      _buildInfoColumn('Dosage', medicine.dosage),
+                      _buildInfoColumn('Medical Name', medicine.medicalName),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildInfoColumn('Precautions', medicine.precautions),
+                      _buildInfoColumn('Interactions', medicine.interactions),
+                    ],
+                  )
                 ],
               ),
             ),

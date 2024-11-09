@@ -15,9 +15,14 @@ class CustomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      margin: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.03, vertical: screenHeight * 0.05),
+      padding: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.03, vertical: screenHeight * 0.01),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
@@ -35,12 +40,13 @@ class CustomNavigationBar extends StatelessWidget {
         tabBorderRadius: 20,
         curve: Curves.easeInCirc,
         duration: const Duration(milliseconds: 500),
-        gap: 1,
+        gap: screenWidth * 0.002,
         color: Colors.black,
         activeColor: lightBlue,
-        iconSize: 0,
+        iconSize: screenWidth * 0.06,
         tabBackgroundColor: orange.withOpacity(0.1),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.05, vertical: screenHeight * 0.007),
         onTabChange: onTabChange,
         selectedIndex: currentIndex,
         tabs: [
@@ -52,59 +58,72 @@ class CustomNavigationBar extends StatelessWidget {
               children: [
                 const Icon(Icons.home_outlined,
                     color: Color(0xff003356), size: 24),
-                const SizedBox(height: 4),
-                Text('Home',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                      shadows: currentIndex == 1
-                          ? [
-                              BoxShadow(
-                                  color: Colors.blue.withOpacity(0.6),
-                                  blurRadius: 8)
-                            ]
-                          : null,
-                    )),
+                SizedBox(height: screenHeight * 0.004),
+                Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: screenWidth * 0.03,
+                    color: Colors.black,
+                    shadows: currentIndex == 0
+                        ? [
+                            BoxShadow(
+                                color: Colors.blue.withOpacity(0.6),
+                                blurRadius: 8)
+                          ]
+                        : null,
+                  ),
+                ),
               ],
             ),
           ),
-          const GButton(
+          GButton(
             icon: Icons.circle,
             iconColor: Colors.transparent,
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(CupertinoIcons.chat_bubble,
+                const Icon(CupertinoIcons.chat_bubble,
                     color: Color(0xff003356), size: 24),
-                SizedBox(height: 4),
-                Text('AI Chat',
-                    style: TextStyle(fontSize: 12, color: Colors.black)),
+                SizedBox(height: screenHeight * 0.004),
+                Text(
+                  'AI Chat',
+                  style: TextStyle(
+                      fontSize: screenWidth * 0.03, color: Colors.black),
+                ),
               ],
             ),
           ),
-          const GButton(
+          GButton(
             icon: Icons.circle,
             iconColor: Colors.transparent,
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(CupertinoIcons.clock, color: Color(0xff003356), size: 24),
-                SizedBox(height: 4),
-                Text('Reminders',
-                    style: TextStyle(fontSize: 12, color: Colors.black)),
+                const Icon(CupertinoIcons.clock,
+                    color: Color(0xff003356), size: 24),
+                SizedBox(height: screenHeight * 0.004),
+                Text(
+                  'Reminders',
+                  style: TextStyle(
+                      fontSize: screenWidth * 0.03, color: Colors.black),
+                ),
               ],
             ),
           ),
-          const GButton(
+          GButton(
             icon: Icons.circle,
             iconColor: Colors.transparent,
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(CupertinoIcons.heart, color: Color(0xff003356), size: 24),
-                SizedBox(height: 4),
-                Text('Favourites',
-                    style: TextStyle(fontSize: 12, color: Colors.black)),
+                const Icon(CupertinoIcons.heart,
+                    color: Color(0xff003356), size: 24),
+                SizedBox(height: screenHeight * 0.004),
+                Text(
+                  'Favourites',
+                  style: TextStyle(
+                      fontSize: screenWidth * 0.03, color: Colors.black),
+                ),
               ],
             ),
           ),

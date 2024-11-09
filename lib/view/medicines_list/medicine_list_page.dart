@@ -32,6 +32,9 @@ class _MedicineListPageState extends State<MedicineListPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Use MediaQuery to make the app responsive
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromRadius(30),
@@ -58,7 +61,7 @@ class _MedicineListPageState extends State<MedicineListPage> {
 
         // Show a message if no medicines are available for the selected category
         if (viewModel.medicines.isEmpty) {
-          return Center(
+          return const Center(
               child: Text('No medicines available for this category.'));
         }
 

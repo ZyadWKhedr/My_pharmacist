@@ -43,55 +43,65 @@ class CustomNavigationBar extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         onTabChange: onTabChange,
         selectedIndex: currentIndex,
-        tabs: const [
+        tabs: [
           GButton(
             icon: Icons.circle,
             iconColor: Colors.transparent,
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.home_filled, color: Color(0xff003356), size: 24),
-                SizedBox(height: 4),
+                const Icon(Icons.home_outlined,
+                    color: Color(0xff003356), size: 24),
+                const SizedBox(height: 4),
                 Text('Home',
-                    style: TextStyle(fontSize: 12, color: Colors.black)),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                      shadows: currentIndex == 1
+                          ? [
+                              BoxShadow(
+                                  color: Colors.blue.withOpacity(0.6),
+                                  blurRadius: 8)
+                            ]
+                          : null,
+                    )),
               ],
             ),
           ),
-          GButton(
+          const GButton(
             icon: Icons.circle,
             iconColor: Colors.transparent,
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.chat_bubble, color: Color(0xff003356), size: 24),
+                Icon(CupertinoIcons.chat_bubble,
+                    color: Color(0xff003356), size: 24),
                 SizedBox(height: 4),
                 Text('AI Chat',
                     style: TextStyle(fontSize: 12, color: Colors.black)),
               ],
             ),
           ),
-          GButton(
+          const GButton(
             icon: Icons.circle,
             iconColor: Colors.transparent,
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(CupertinoIcons.clock_fill,
-                    color: Color(0xff003356), size: 24),
+                Icon(CupertinoIcons.clock, color: Color(0xff003356), size: 24),
                 SizedBox(height: 4),
                 Text('Reminders',
                     style: TextStyle(fontSize: 12, color: Colors.black)),
               ],
             ),
           ),
-          GButton(
+          const GButton(
             icon: Icons.circle,
             iconColor: Colors.transparent,
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(CupertinoIcons.heart_fill,
-                    color: Color(0xff003356), size: 24),
+                Icon(CupertinoIcons.heart, color: Color(0xff003356), size: 24),
                 SizedBox(height: 4),
                 Text('Favourites',
                     style: TextStyle(fontSize: 12, color: Colors.black)),

@@ -20,7 +20,8 @@ class CustomSearchBar extends StatelessWidget {
             hintText: 'Search for a drug...',
             hintStyle: const TextStyle(color: Color(0xff003356)),
             prefixIcon: const Icon(Icons.search, color: Color(0xff003356)),
-            contentPadding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide: BorderSide(color: lightBlue, width: 2.0),

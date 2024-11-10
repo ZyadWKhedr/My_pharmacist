@@ -1,4 +1,4 @@
-# Healio App
+# My Pharmacist App
 
 Healio is a health-related app designed to provide users with access to a variety of features such as medicine information, reminders, and AI chat. The app aims to help users easily track their medications, find health-related information, and manage their health in an efficient and user-friendly manner.
 

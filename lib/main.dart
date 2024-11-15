@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:healio/core/const.dart';
 import 'package:healio/core/routes/routers.dart';
 import 'package:healio/core/routes/routes.dart';
-import 'package:healio/notifications/notifications.dart';
+import 'package:healio/core/notifications/notifications.dart';
 import 'package:healio/view_model/article_provider.dart';
 import 'package:healio/view_model/medicine_provider.dart';
 import 'package:healio/view_model/user_view_model.dart';

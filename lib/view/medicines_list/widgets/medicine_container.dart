@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healio/core/const.dart';
 import 'package:healio/core/widgets/custom_button.dart';
-import 'package:healio/database/database_helper_class.dart';
+import 'package:healio/core/database/database_helper_class.dart';
 import 'package:healio/model/medicine_model.dart';
 
 class MedicineContainer extends StatelessWidget {
